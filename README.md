@@ -23,3 +23,17 @@ props: {
   }
 ``` 
 #### Either way be sure your component has a page prop and a group prop so you can add the component with `<WidgetWall :group="$props.group" :page="$props.page" />`
+
+#### For home page the props should look something like this
+```vue
+props: {
+    page: {
+      type: String,
+      default: 'homepage'
+    },
+    group: {
+      type: String,
+      default: 'cms'
+    }
+  }
+```

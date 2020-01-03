@@ -55,7 +55,6 @@
           query.applyFilter({key: 'cat_parameters', value: {'in': this.$props.parent_id}})
           return extraQuickSearchByQuery({query, entityType: 'widget_instance'})
                   .then((resp) => {
-                    console.log(resp.items)
                     this.lists = resp.items
                   })
                   .catch(err => {
@@ -66,15 +65,18 @@
       getCmsList () {
         if (this.$props.group && this.$props.group === 'cms') {
           let query = new SearchQuery()
-          console.log(this.$root._route.fullPath.split('/').pop())
-          let path = this.$root._route.fullPath.split('/').pop()
+          let adjustedFullPath = this.$root._route.fullPath.replace(/\/+$/, '')
+          let path = adjustedFullPath.split('/').pop()
+          if (this.$props.page === 'homepage') {
+            path = 'homepage'
+          }
           query.applyFilter({ key: 'decoded_parameters.route', value: { 'eq': path }})
           return extraQuickSearchByQuery({ query, entityType: 'widget_instance' })
                   .then((resp) => {
                     this.lists = resp.items
                   })
                   .catch(err => {
-                    Logger.error(err, 'faq')()
+                    Logger.error(err, 'widget')()
                   })
         }
       }
