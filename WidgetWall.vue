@@ -52,7 +52,7 @@
       getList () {
         if (this.$props.parent_id) {
           let query = new SearchQuery()
-          query.applyFilter({key: 'cat_parameters', value: {'in': this.$props.parent_id}})
+          query.applyFilter({key: 'parameter_category', value: {'in': this.$props.parent_id}})
           return extraQuickSearchByQuery({query, entityType: 'widget_instance'})
                   .then((resp) => {
                     this.lists = resp.items
